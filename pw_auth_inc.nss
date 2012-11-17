@@ -74,7 +74,7 @@ const int PASSWORD_TRY_LIMIT = 3;
 const string GUI_INPUTBOX_ENTER_NEW_PASSWORD = "Merci d'entrer un nouveau Mot de Passe";
 
 //Message written when the player has type his registered password
-const string GUI_INPUTBOX_ENTER_CURRENT_PASSWORD = "Merci d'entrer votre Mot de Passe 'lcda' pour entrer sur le server";
+const string GUI_INPUTBOX_ENTER_CURRENT_PASSWORD = "Merci d'entrer votre Mot de Passe pour entrer sur le server";
 
 //Text to display on the validate button
 const string GUI_INPUTBOX_VALIDATE = "Valider";
@@ -90,7 +90,7 @@ const string GUI_INPUTBOX_QUIT = "Quitter";
 // /////////////////////////////////////////////////////////////////////
 //Text displayed when asking the player to type his password
 //You should inform the player that this password will be visible by the admins
-const string ASK_PASSWORD = "Merci d'entrer un mot de passe qui vous servira à chaque fois que vous vous connecterez sur un ordinateur/point d'accès différent.\nNote: Le staff aura accès à ce mot de passe.";
+const string ASK_PASSWORD = "Merci d'entrer un mot de passe qui vous servira à chaque fois que vous vous connecterez sur un ordinateur/point d'accès différent.";
 
 //text displayed when the player has successfully registered his password
 const string PASSWORD_REGISTERED = "Mot de passe enregistré !\nPensez à le noter quelque part ;)";
