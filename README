@@ -1,0 +1,58 @@
+
+==========>  You must first import scripts.erf into your module
+
+
+taken from pw_auth_inc.nss :
+
+// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+//				G E N E R A L         I N F O R M A T I O N 
+// /////////////////////////////////////////////////////////////////////
+//
+//This script adds a second authentification system to your module to prevent 
+//	people to use somebody else account by skipping bioware authentification.
+//
+//The script register into MySQL the password of the account and combinations of IP+CDKey that the player uses
+//
+//It will ask the player to :
+//	- Set his password if the password is not registered
+//	- Retype his password if his IP of CDKey has not been registered yet
+//	- Nothing if the password has been set and the IP/CDKey is registered
+//
+//
+
+//
+//Before installing it, you should read & configure these lines :
+//
+//
+//	You must modify your OnPCLoad script by adding this line :
+//		At the top of the file :
+//			#include "pw_auth_inc"
+//		After void main(){
+//			PWAuthOnPCLoad();
+//
+//
+//	pw_auth needs a table where is listed all accounts and their respective passwords
+//		This is the table where is stocked the list of accounts and their password
+		const string TABLE_ACCOUNT = "account";
+			//The name of the column where is written the name of the account
+			const string TABLE_ACCOUNT_COLUMN_ACCOUNT = "name";
+			//The column where is written the password of the account
+			const string TABLE_ACCOUNT_COLUMN_PASSWORD = "password";
+
+//		If you already have an account list table, you should add a password column :
+//			Adding a 'password' column into the account table (replace upper constants with their values)
+//				ALTER TABLE `nwnx`.`TABLE_ACCOUNT` ADD COLUMN `TABLE_ACCOUNT_COLUMN_PASSWORD` VARCHAR(64) NULL DEFAULT NULL;
+//
+//		If you don't have this table, you must create it and add the account registration into the OnClientEnter script
+//			SQL Command to execute (replace upper constants with their values)
+//				CREATE TABLE `TABLE_ACCOUNT` (`TABLE_ACCOUNT_COLUMN_ACCOUNT` varchar(45) NOT NULL, `TABLE_ACCOUNT_COLUMN_PASSWORD` varchar(64) default NULL,  PRIMARY KEY (`TABLE_ACCOUNT`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+//			Modifications to the module OnClientEnter script
+//				At the top of the file :
+//					#include "pw_auth_inc"
+//				After void main(){
+//					PWAuthRegisterAccountOnClientEnter();
+//
+//	You must create a 'authentification' table by executing this MySQL command (replace upper constants with their values) : 
+//		CREATE TABLE `authentification` (`account_name` varchar(45) NOT NULL,`ip` varchar(15) NOT NULL,`cdkey` varchar(45) NOT NULL,`approved` tinyint(1) default '1', PRIMARY KEY  (`account_name`,`ip`,`cdkey`), KEY `fk_authentification_account1` (`account_name`), CONSTRAINT `fk_authentification_account1` FOREIGN KEY (`account_name`) REFERENCES `TABLE_ACCOUNT` (`TABLE_ACCOUNT_COLUMN_ACCOUNT`) ON DELETE NO ACTION ON UPDATE NO ACTION) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+//
+//
