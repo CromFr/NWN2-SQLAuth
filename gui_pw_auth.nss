@@ -57,6 +57,7 @@ void main(string sInput)
 					if(nPasswordTests >= PASSWORD_TRY_LIMIT)
 					{
 						SetGlobalInt("PWD_TESTS_"+sAccount, 0);
+						WriteTimestampedLogEntry("[PW_AUTH] '" + GetPCPlayerName(OBJECT_SELF) + "' has been kicked from the server after trying " + IntToString(nPasswordTests) + " wrong passwords");
 						BootPC(OBJECT_SELF);
 						break;
 					}
